@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: time-card_production
-  username: time-card
-  password: <%= ENV['TIME-CARD_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
