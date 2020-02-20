@@ -1,1 +1,26 @@
-ああああああ
+.times-index-wrapper
+  .times-index-wrapper__contents
+    .times-index-margin
+    .times-index-wrapper__contents__title
+      %h1 Time-Card
+    .times-index-wrapper__contents__search
+      .search-form
+        %input#search-member-form{placeholder: "名前を入力して下さい", type: "text"}
+      .search-member
+        .search-member__list
+          .search-member__list__name
+            西脇杜直
+          = link_to times_path, method: :post, class: "search-member__list__btn-going" do
+            出勤
+        .search-member__list
+          .search-member__list__name
+            西脇杜直
+          = link_to times_path, method: :post, class: "search-member__list__btn-going" do
+            出勤
+        .search-member__list
+          .search-member__list__name
+            西脇杜直
+          = link_to times_path, method: :post, class: "search-member__list__btn-going" do
+            出勤
+
+
