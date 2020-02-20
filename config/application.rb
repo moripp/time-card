@@ -25,5 +25,6 @@ module TimeCard
       g.helper false
       g.test_framework false
     end
+    config.time_zone = 'Tokyo' # 時間の表示を日本時間にする
   end
 end

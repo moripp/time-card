@@ -55,6 +55,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # 開発
 gem 'haml-rails'
 gem 'erb2haml' # hamlに変換する
+gem 'jquery-rails'
 gem 'pry-rails'
 
 # user登録
