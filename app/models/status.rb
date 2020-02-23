@@ -1,4 +1,4 @@
-class Attendance < ApplicationRecord
+class Status < ApplicationRecord
   # association
   belongs_to :user
 end
