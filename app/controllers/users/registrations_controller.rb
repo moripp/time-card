@@ -10,9 +10,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    ActiveRecord::Base.transaction do
+      @user = User.new(sign_up_params)
+      @user.save!
+      @state = @user.build_status
+      @state.save!
+    end
+      sign_in(:user, @user)
+      redirect_to root_path
+    rescue
+      redirect_to new_user_registration_path
+  end
 
   # GET /resource/edit
   # def edit
