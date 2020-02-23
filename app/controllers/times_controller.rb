@@ -1,9 +1,5 @@
 class TimesController < ApplicationController
   def index
-    @users = User.all
-  end
-
-  def new
     respond_to do |format|
       format.html
       format.json
@@ -11,6 +7,5 @@ class TimesController < ApplicationController
   end
 
   def create
-    binding.pry
   end
 end

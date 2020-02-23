@@ -5,5 +5,6 @@ class User < ApplicationRecord
           :recoverable, :rememberable, :validatable
 
   # association
-  has_one :attendance
+  has_many :attendances
+  has_one :status
 end
