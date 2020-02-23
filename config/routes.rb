@@ -6,5 +6,5 @@ Rails.application.routes.draw do
 
   root "home#index"
   resources :home, only: [:index]
-  resources :times, only: [:index, :new, :create]
+  resources :times, only: [:index, :create]
 end
