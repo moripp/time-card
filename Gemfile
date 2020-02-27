@@ -68,5 +68,8 @@ gem 'erb2haml' # hamlに変換する
 gem 'jquery-rails'
 gem 'pry-rails'
 
+# モデル関係
+gem 'enum_help'
+
 # user登録
 gem 'devise'
