@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Time-Cardリンク
+http://3.115.169.232/
 
-Things you may want to cover:
+## 機能概要
+このアプリは勤怠管理を目的として作成したアプリです。
+機能の詳細は下記の通りです。
 
-* Ruby version
+### 出勤、退勤処理
+検索formに名前を入力するとヒットしたユーザー情報が表示。
+名前の右に出るボタンを押すことで、出勤、退勤処理ができる。
 
-* System dependencies
+### 勤怠確認
+勤怠の確認ができる。
+自分自身の勤怠のみ確認できる。
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### 勤怠編集
+勤怠の修正ができる。
