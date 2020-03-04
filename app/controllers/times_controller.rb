@@ -12,9 +12,8 @@ class TimesController < ApplicationController
   def create
     @user = User.find(user_id_params)
     @status = @user.status
-    state = @status.state
     time = Time.now # 現在時刻を生成
-    if state == "going_to_work" # 出勤中の場合
+    if @status.going_to_work? # 出勤中の場合
       @attendance = Attendance.where(user_id: user_id_params, leave_work: nil)
                               .where.not(going_to_work: nil)
                               .order(created_at: :desc).limit(1)
