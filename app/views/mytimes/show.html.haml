@@ -1,0 +1,25 @@
+%table
+  %tr
+    %th 日付
+    %th 勤務
+    %th 出勤時間
+    %th 退勤時間
+    %th 勤務時間
+    %th 給料
+
+  - @attendances.each do |attendance|
+    -if attendance[0] == "holiday"
+      %tr
+        %td= set_date(attendance[1])
+        %td 休
+        %td
+        %td
+        %td
+    -else
+      %tr
+        %td= set_date(attendance.going_to_work)
+        %td
+        %td= set_time(attendance.going_to_work)
+        %td= set_time(attendance.leave_work)
+        %td= set_working_hours(attendance.going_to_work, attendance.leave_work)
+
