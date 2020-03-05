@@ -18,4 +18,9 @@ module ApplicationHelper
     total = time2 - time1
     Time.at(total).utc.strftime("%R")
   end
+
+  # n年前を取得
+  def ago_year(n)
+    Time.current.ago(n.years).year
+  end
 end
