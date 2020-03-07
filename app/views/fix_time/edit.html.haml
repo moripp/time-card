@@ -1,0 +1,57 @@
+.mytimes-show-wrapper
+  .mytimes-show-wrapper__header
+    .show-margin
+    .header-title
+      勤怠確認
+    .header-form
+      .header-form__name
+        = current_user.name
+      .header-form__date
+        = form_with(url: mytime_path(current_user.id), method: :get, local: true, class: "date-form-area") do |f|
+          .select-box
+            = select_tag 'date[year]', options_for_select([Time.current.year, ago_year(1), ago_year(2), ago_year(3), ago_year(4), ago_year(5), ago_year(6), ago_year(7), ago_year(8), ago_year(9)], selected: @year)
+            .icon-chevron-down
+              = fa_icon("chevron-down") 
+            .select-box-character
+              年
+          .select-box
+            = select_tag 'date[month]', options_for_select(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"], selected: @month)
+            .icon-chevron-down
+              = fa_icon("chevron-down") 
+            .select-box-character
+              月
+          .date-send-btn
+            = f.submit "確認", class: "send-btn"
+
+
+  .mytimes-show-wrapper__contents
+    = form_with(url: fix_time_path, method: :patch, local: true) do |f|
+      .mytimes-show-wrapper__contents__table
+        %table
+          %tr
+            %th 日付
+            %th 勤務
+            %th 出勤時間
+            %th 退勤時間
+            %th 勤務時間
+          - @attendances.each do |attendance|
+            -if attendance[0] == "holiday"
+              = fields_for "newAttendances[]", attendance[2] do |n|
+                %tr
+                  %td= set_date(attendance[1])
+                  %td 休
+                  %td{class: "td-form-input"}= n.time_field :going_to_work, class: "form-value-input"
+                  %td{class: "td-form-input"}= n.time_field :leave_work, class: "form-value-input"
+                  %td
+                = n.hidden_field :date, value: "#{set_day(attendance[1])}"
+            -else
+              = fields_for "editAttendances[]", attendance do |e|
+                %tr
+                  %td= set_date(attendance.going_to_work)
+                  %td
+                  %td{class: "td-form-input"}= e.time_field :going_to_work, value: "#{set_time(attendance.going_to_work)}", class: "form-value-input"
+                  %td{class: "td-form-input"}= e.time_field :leave_work, value: "#{set_time(attendance.leave_work)}", class: "form-value-input"
+                  %td= set_working_hours(attendance.going_to_work, attendance.leave_work)
+                = e.hidden_field :date, value: "#{set_day(attendance.going_to_work)}"
+      .mytimes-show-wrapper__contents__send-btn
+        = f.submit

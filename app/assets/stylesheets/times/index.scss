@@ -4,6 +4,25 @@
     height: 100vh;
     .times-index-margin {
       height: 90px;
+      .link-home {
+        width: 100px;
+        height: 70px;
+        margin: 0 0 0 auto;
+        position: relative;
+        .home-index-path {
+          text-decoration: none;
+          position: absolute;
+          bottom: 0;
+          border: 1px solid $gray;
+          border-radius: 5px;
+          font-size: 20px;
+          width: 80px;
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+          color: $dimgray;
+          }
+      }
     }
     &__title {
       text-align: center;
