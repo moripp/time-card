@@ -1,6 +1,9 @@
 .times-index-wrapper
   .times-index-wrapper__contents
     .times-index-margin
+      .link-home
+        = link_to home_index_path, class: "home-index-path" do
+          home
     .times-index-wrapper__contents__title
       %h1 Time-Card
     .times-index-wrapper__contents__search

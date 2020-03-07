@@ -6,6 +6,11 @@ module ApplicationHelper
     time.strftime("%-d(#{wd[time.wday]})")
   end
 
+  # 日付だけ取り出すメソッド
+  def set_day(time)
+    time.strftime("%-d")
+  end
+
   # 時間だけ表示するメソッド
   def set_time(time)
     time.strftime("%H:%M")

@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :home, only: [:index]
   resources :times, only: [:index, :create]
   resources :mytimes, only: [:index, :show]
+  resources :fix_time, only: [:index, :edit, :update]
 end
