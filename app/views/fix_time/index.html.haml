@@ -1,4 +1,6 @@
 .mytimes-show-wrapper
+  = render 'layouts/common_header'
+
   .mytimes-show-wrapper__header
     .show-margin
     .header-title
@@ -10,17 +12,6 @@
           .icon-chevron-down
             = fa_icon("chevron-down") 
         .header-form__date
-          .select-box
-            = select_tag 'date[year]', options_for_select([Time.current.year, ago_year(1), ago_year(2), ago_year(3), ago_year(4), ago_year(5), ago_year(6), ago_year(7), ago_year(8), ago_year(9)], selected: @year)
-            .icon-chevron-down
-              = fa_icon("chevron-down") 
-            .select-box-character
-              年
-          .select-box
-            = select_tag 'date[month]', options_for_select(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"], selected: @month)
-            .icon-chevron-down
-              = fa_icon("chevron-down") 
-            .select-box-character
-              月
+          = render 'mytimes/header_form_date_contents'
           .date-send-btn
             = f.submit "選択", class: "send-btn"
