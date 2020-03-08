@@ -3,11 +3,11 @@
     .show-margin
     .header-title
       勤怠確認
-    .header-form
-      .header-form__name
-        = current_user.name
-      .header-form__date
-        = form_with(url: mytime_path(current_user.id), method: :get, local: true, class: "date-form-area") do |f|
+    = form_with(url: mytime_path(current_user.id), method: :get, local: true, class: "date-form-area") do |f|
+      .header-form
+        .header-form__name
+          = current_user.name
+        .header-form__date
           .select-box
             = select_tag 'date[year]', options_for_select([Time.current.year, ago_year(1), ago_year(2), ago_year(3), ago_year(4), ago_year(5), ago_year(6), ago_year(7), ago_year(8), ago_year(9)], selected: @year)
             .icon-chevron-down

@@ -20,53 +20,70 @@
         margin-left: 120px;
         color: $thin-black;
         font-size: 25px;
+        position: relative;
+        #user_name_select {
+          color: $form-black;
+          font-size: 25px;
+          background-color: $white;
+          width: 250px;
+          height: 50px;
+          padding-left: 10px;
+          cursor: pointer;
+          border-style: none;
+          border: solid 1px $silver;
+          border-radius: 5px;
+        }
+        .icon-chevron-down {
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          pointer-events: none;
+        }
       } 
       &__date {
         margin: 0 30px 0 auto;
-        .date-form-area {
+        display: flex;
+        .select-box {
           display: flex;
-          .select-box {
-            display: flex;
-            color: $thin-black;
-            position: relative;
-            #date_year, #date_month {
-              color: $form-black;
-              font-size: 20px;
-              background-color: $white;
-              width: 80px;
-              height: 30px;
-              padding-left: 5px;
-              cursor: pointer;
-              border-style: none;
-              border: solid 1px $silver;
-              border-radius: 5px;
-            }
-            #date_month {
-              width: 45px;
-            }
-            .icon-chevron-down {
-              position: absolute;
-              top: 7px;
-              right: 35px;
-              pointer-events: none;
-            }
-            .select-box-character {
-              margin: 0 10px 0 5px;
-              line-height: 30px;
-            }
+          color: $thin-black;
+          position: relative;
+          #date_year, #date_month {
+            color: $form-black;
+            font-size: 20px;
+            background-color: $white;
+            width: 80px;
+            height: 30px;
+            padding-left: 5px;
+            cursor: pointer;
+            border-style: none;
+            border: solid 1px $silver;
+            border-radius: 5px;
           }
-          .date-send-btn {
-            .send-btn {
-              color: $form-black;
-              font-size: 15px;
-              height: 30px;
-              width: 50px;
-              line-height: 20px;
-              cursor: pointer;
-              border-style: none;
-              border: solid 1px $silver;
-              border-radius: 5px;
-            }
+          #date_month {
+            width: 45px;
+          }
+          .icon-chevron-down {
+            position: absolute;
+            top: 7px;
+            right: 35px;
+            pointer-events: none;
+          }
+          .select-box-character {
+            margin: 0 10px 0 5px;
+            line-height: 30px;
+          }
+        }
+        .date-send-btn {
+          .send-btn {
+            color: $form-black;
+            font-size: 15px;
+            height: 30px;
+            width: 50px;
+            line-height: 20px;
+            cursor: pointer;
+            border-style: none;
+            border: solid 1px $silver;
+            border-radius: 5px;
           }
         }
       }
