@@ -92,9 +92,12 @@
   &__contents {
     margin-top: 30px;
     margin-bottom: 30px;
+
     &__table {
       width: 500px;
-      margin: 0 auto;
+      &__add-class {
+        margin: 0 auto;
+      }
       table {
         tr {
           th {

@@ -27,3 +27,35 @@ input[type="time"]::-webkit-clear-button {
 input[type="time"]::-ms-clear {
   display: none;
 }
+
+
+
+#fix-time-edit_date-send-btn {
+  visibility: hidden;
+}
+
+.mytimes-show-wrapper__contents__form {
+  display: flex;
+  .mytimes-show-wrapper__contents__send-btn {
+    margin-left: 10px;
+    position: relative;
+    &__top {
+    }
+    &__bottom {
+      position: absolute;
+      bottom: 0;
+    }
+  }
+  .fix-attendance-btn {
+    color: $white;
+    background-color: $gray;
+    font-size: 15px;
+    height: 30px;
+    width: 100px;
+    line-height: 20px;
+    cursor: pointer;
+    border-style: none;
+    border: solid 1px $silver;
+    border-radius: 5px;
+  }
+}

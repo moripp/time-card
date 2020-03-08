@@ -4,9 +4,9 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-  root "times#index"
-  resources :home, only: [:index]
-  resources :times, only: [:index, :create]
-  resources :mytimes, only: [:index, :show]
-  resources :fix_time, only: [:index, :edit, :update]
+  root "emboss#index" # 打刻画面
+  resources :home, only: [:index] # ホーム画面（各ページへのリンクが存在）
+  resources :emboss, only: [:index, :create] # 勤怠打刻
+  resources :mytimes, only: [:index, :show] # 自分の勤怠を確認
+  resources :fix_time, only: [:index, :edit, :update] # 勤怠修正
 end

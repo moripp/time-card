@@ -1,0 +1,9 @@
+.common-header
+  .margin
+  .common-header__btn-area
+    = link_to home_index_path, class: "common-header__btn-area__btn" do
+      home
+    = link_to destroy_user_session_path, method: :delete, class: "common-header__btn-area__btn" do
+      logout
+
+
