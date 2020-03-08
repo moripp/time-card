@@ -2,12 +2,14 @@
   .mytimes-show-wrapper__header
     .show-margin
     .header-title
-      勤怠確認
-    .header-form
-      .header-form__name
-        = current_user.name
-      .header-form__date
-        = form_with(url: mytime_path(current_user.id), method: :get, local: true, class: "date-form-area") do |f|
+      勤怠編集
+    = form_with(url: edit_fix_time_path(@user.id), method: :get, local: true, class: "date-form-area", id: "date-and-name-form-area") do |f|
+      .header-form
+        .header-form__name
+          = collection_select(:user, :name_select, User.all, :id, :name, selected: @user.id)
+          .icon-chevron-down
+            = fa_icon("chevron-down") 
+        .header-form__date
           .select-box
             = select_tag 'date[year]', options_for_select([Time.current.year, ago_year(1), ago_year(2), ago_year(3), ago_year(4), ago_year(5), ago_year(6), ago_year(7), ago_year(8), ago_year(9)], selected: @year)
             .icon-chevron-down
@@ -50,8 +52,12 @@
                   %td= set_date(attendance.going_to_work)
                   %td
                   %td{class: "td-form-input"}= e.time_field :going_to_work, value: "#{set_time(attendance.going_to_work)}", class: "form-value-input"
-                  %td{class: "td-form-input"}= e.time_field :leave_work, value: "#{set_time(attendance.leave_work)}", class: "form-value-input"
-                  %td= set_working_hours(attendance.going_to_work, attendance.leave_work)
-                = e.hidden_field :date, value: "#{set_day(attendance.going_to_work)}"
+                  -if attendance.leave_work
+                    %td{class: "td-form-input"}= e.time_field :leave_work, value: "#{set_time(attendance.leave_work)}", class: "form-value-input"
+                    %td= set_working_hours(attendance.going_to_work, attendance.leave_work)
+                  -else
+                    %td{class: "td-form-input"}= e.time_field :leave_work, class: "form-value-input"
+                    %td
+                = e.hidden_field :id, value: "#{attendance.id}"
       .mytimes-show-wrapper__contents__send-btn
         = f.submit

@@ -1,0 +1,26 @@
+.mytimes-show-wrapper
+  .mytimes-show-wrapper__header
+    .show-margin
+    .header-title
+      勤怠編集
+    = form_with(url: edit_fix_time_path(current_user.id), method: :get, local: true, class: "date-form-area", id: "date-and-name-form-area") do |f|
+      .header-form
+        .header-form__name
+          = collection_select(:user, :name_select, User.all, :id, :name, selected: current_user.id)
+          .icon-chevron-down
+            = fa_icon("chevron-down") 
+        .header-form__date
+          .select-box
+            = select_tag 'date[year]', options_for_select([Time.current.year, ago_year(1), ago_year(2), ago_year(3), ago_year(4), ago_year(5), ago_year(6), ago_year(7), ago_year(8), ago_year(9)], selected: @year)
+            .icon-chevron-down
+              = fa_icon("chevron-down") 
+            .select-box-character
+              年
+          .select-box
+            = select_tag 'date[month]', options_for_select(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"], selected: @month)
+            .icon-chevron-down
+              = fa_icon("chevron-down") 
+            .select-box-character
+              月
+          .date-send-btn
+            = f.submit "選択", class: "send-btn"
