@@ -1,12 +1,16 @@
+.users-wrapper
+  .users-wrapper__header
+    .users-wrapper__header__title
+      = link_to root_path, class: "link-root" do
+        %h1 Time-Card
 
-= link_to destroy_user_session_path, method: :delete do
-  %span ログアウト
-
-= link_to root_path do
-  %span time-card
-
-= link_to mytimes_path do
-  %span 自分の出勤確認
-
-= link_to fix_time_index_path do
-  %span 勤怠編集
+  .users-wrapper__contents
+    .users-wrapper__contents__btns
+      = link_to mytimes_path, class: "home-btns-layout" do
+        自分の勤怠確認
+      = link_to fix_time_index_path, class: "home-btns-layout" do
+        勤怠確認と修正
+      = link_to root_path, class: "home-btns-layout" do
+        勤怠打刻
+      = link_to destroy_user_session_path, method: :delete, class: "home-btns-layout log-out-btn" do
+        ログアウト

@@ -1,66 +1,67 @@
-.mytimes-show-wrapper
-  = render 'layouts/common_header'
+.fix-wrapper
+  .mytimes-show-wrapper
+    = render partial: 'mytimes/title_header', locals: { page_title: "勤怠確認と修正" }
 
-  .mytimes-show-wrapper__header
-    .show-margin
-    .header-title
-      勤怠編集
-    = form_with(url: edit_fix_time_path(@user.id), method: :get, local: true, name: "aa", class: "date-form-area", id: "date-and-name-form-area") do |f|
-      .header-form
-        .header-form__name
-          = collection_select(:user, :name_select, User.all, :id, :name, {selected: @user.id}, {class: "fix-time-edit_select"})
-          .icon-chevron-down
-            = fa_icon("chevron-down")
-        .header-form__date
-          .select-box
-            = select_tag 'date[year]', options_for_select([Time.current.year, ago_year(1), ago_year(2), ago_year(3), ago_year(4), ago_year(5), ago_year(6), ago_year(7), ago_year(8), ago_year(9)], selected: @year), {class: "fix-time-edit_select"}
+    .mytimes-show-wrapper__header
+      = form_with(url: edit_fix_time_path(@user.id), method: :get, local: true, name: "aa", class: "date-form-area", id: "date-and-name-form-area") do |f|
+        .header-form
+          .header-form__name
+            = collection_select(:user, :name_select, User.all, :id, :name, {selected: @user.id}, {class: "fix-time-edit_select"})
             .icon-chevron-down
               = fa_icon("chevron-down")
-            .select-box-character
-              年
-          .select-box
-            = select_tag 'date[month]', options_for_select(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"], selected: @month), {class: "fix-time-edit_select"}
-            .icon-chevron-down
-              = fa_icon("chevron-down")
-            .select-box-character
-              月
-          .date-send-btn
-            = f.submit "確認", class: "send-btn", id: "fix-time-edit_date-send-btn"
+          .header-form__date
+            .select-box
+              = select_tag 'date[year]', options_for_select([Time.current.year, ago_year(1), ago_year(2), ago_year(3), ago_year(4), ago_year(5), ago_year(6), ago_year(7), ago_year(8), ago_year(9)], selected: @year), {class: "fix-time-edit_select"}
+              .icon-chevron-down
+                = fa_icon("chevron-down")
+              .select-box-character
+                年
+            .select-box
+              = select_tag 'date[month]', options_for_select(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"], selected: @month), {class: "fix-time-edit_select"}
+              .icon-chevron-down
+                = fa_icon("chevron-down")
+              .select-box-character
+                月
+            .date-send-btn
+              = f.submit "確認", class: "send-btn", id: "fix-time-edit_date-send-btn"
 
-  .mytimes-show-wrapper__contents
-    = form_with(url: fix_time_path, method: :patch, local: true, class: "mytimes-show-wrapper__contents__form") do |f|
-      = f.hidden_field :year, value: "#{@year}"
-      = f.hidden_field :month, value: "#{@month}"
-      = f.hidden_field :user_id, value: "#{@user.id}"
+    .mytimes-show-wrapper__contents
+      = form_with(url: fix_time_path, method: :patch, local: true, class: "mytimes-show-wrapper__contents__form") do |f|
+        = f.hidden_field :year, value: "#{@year}"
+        = f.hidden_field :month, value: "#{@month}"
+        = f.hidden_field :user_id, value: "#{@user.id}"
 
-      .mytimes-show-wrapper__contents__table
-        %table
-          = render 'mytimes/tr_title'
-          - @attendances.each do |attendance|
-            -if attendance[0] == "holiday"
-              = fields_for "newAttendances[]", attendance[2] do |n|
-                %tr
-                  %td= set_date(attendance[1])
-                  %td 休
-                  %td{class: "td-form-input"}= n.time_field :going_to_work, class: "form-value-input"
-                  %td{class: "td-form-input"}= n.time_field :leave_work, class: "form-value-input"
-                  %td
-                = n.hidden_field :date, value: "#{set_day(attendance[1])}"
-            -else
-              = fields_for "editAttendances[]", attendance do |e|
-                %tr
-                  %td= set_date(attendance.going_to_work)
-                  %td
-                  %td{class: "td-form-input"}= e.time_field :going_to_work, value: "#{set_time(attendance.going_to_work)}", class: "form-value-input"
-                  -if attendance.leave_work
-                    %td{class: "td-form-input"}= e.time_field :leave_work, value: "#{set_time(attendance.leave_work)}", class: "form-value-input"
-                    %td= set_working_hours(attendance.going_to_work, attendance.leave_work)
-                  -else
-                    %td{class: "td-form-input"}= e.time_field :leave_work, class: "form-value-input"
+        .mytimes-show-wrapper-contents-table-width
+        .mytimes-show-wrapper__contents__table
+          %table
+            = render 'mytimes/tr_title'
+            - @attendances.each do |attendance|
+              -if attendance[0] == "holiday"
+                = fields_for "newAttendances[]", attendance[2] do |n|
+                  %tr
+                    %td= set_date(attendance[1])
+                    %td 休
+                    %td{class: "td-form-input"}= n.time_field :going_to_work, class: "form-value-input"
+                    %td{class: "td-form-input"}= n.time_field :leave_work, class: "form-value-input"
                     %td
-                = e.hidden_field :id, value: "#{attendance.id}"
-      .mytimes-show-wrapper__contents__send-btn
-        .mytimes-show-wrapper__contents__send-btn__top
-          = f.submit "修正する", class: "fix-attendance-btn"
-        .mytimes-show-wrapper__contents__send-btn__bottom
-          = f.submit "修正する", class: "fix-attendance-btn"
+                  = n.hidden_field :date, value: "#{set_day(attendance[1])}"
+              -else
+                = fields_for "editAttendances[]", attendance do |e|
+                  %tr
+                    %td= set_date(attendance.going_to_work)
+                    %td
+                    %td{class: "td-form-input"}= e.time_field :going_to_work, value: "#{set_time(attendance.going_to_work)}", class: "form-value-input"
+                    -if attendance.leave_work
+                      %td{class: "td-form-input"}= e.time_field :leave_work, value: "#{set_time(attendance.leave_work)}", class: "form-value-input"
+                      %td= set_working_hours(attendance.going_to_work, attendance.leave_work)
+                    -else
+                      %td{class: "td-form-input"}= e.time_field :leave_work, class: "form-value-input"
+                      %td
+                  = e.hidden_field :id, value: "#{attendance.id}"
+        .mytimes-show-wrapper__contents__send-btn
+          .mytimes-show-wrapper__contents__send-btn__top
+            = f.submit "修正する", class: "fix-attendance-btn"
+          .mytimes-show-wrapper__contents__send-btn__bottom
+            = f.submit "修正する", class: "fix-attendance-btn"
+
+  .fix-wrapper__footer

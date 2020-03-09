@@ -1,25 +1,30 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :name
-    %br/
-    = f.text_field :name, autofocus: true, autocomplete: "name"
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "users/shared/links"
+.users-wrapper
+  .users-wrapper__header
+    .users-wrapper__header__title
+      = link_to root_path, class: "link-root" do
+        %h1 Time-Card
+
+  .users-wrapper__contents
+    .users-wrapper__contents__form
+      .contents-title
+        %h1 情報入力
+      .registrations-form
+        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          .registrations-form__field
+            = f.label :name, "名前", class: "registrations-form__field__label"
+            = f.text_field :name, autofocus: true, autocomplete: "name", class: "registrations-form__field__form-area", placeholder: "例）鈴木  太郎"
+          .registrations-form__field
+            = f.label :email, "メールアドレス", class: "registrations-form__field__label"
+            = f.email_field :email, autofocus: true, autocomplete: "email", class: "registrations-form__field__form-area", placeholder: "PC、携帯どちらでも可"
+          .registrations-form__field
+            = f.label :password, "パスワード", class: "registrations-form__field__label"
+            = f.password_field :password, autocomplete: "new-password", class: "registrations-form__field__form-area", placeholder: "8文字以上の半角英数字"
+            .registrations-form__field__text
+              ※ 英字と数字の両方を含めて設定してください
+          .registrations-form__field
+            = f.label :password_confirmation, "パスワード確認", class: "registrations-form__field__label"
+            = f.password_field :password_confirmation, autocomplete: "new-password", class: "registrations-form__field__form-area", placeholder: "同じパスワードを入力してください"
+          .registrations-form__field
+            = f.submit "登録", class: "registrations-form__field__send-btn"
+
+  .users-wrapper__footer

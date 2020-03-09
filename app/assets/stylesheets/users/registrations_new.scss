@@ -1,0 +1,52 @@
+.contents-title {
+  height: 80px;
+  background-color: $white;
+  border-bottom: solid 1px $line-silver;
+  text-align: center;
+  line-height: 80px;
+  font-size: 22px;
+  color: $character-black;
+}
+
+.registrations-form {
+  background-color: $white;
+  &__field {
+    padding: 20px 38px 0;
+    &__label {
+      display: block;
+      font-size: 19px;
+      color: $thin-black;
+    }
+    &__form-area {
+      display: block;
+      height: 44px;
+      width: 330px;
+      font-size: 18px;
+      padding: 0 20px;
+      margin-top: 10px;
+      border: solid 1px $line-silver;
+      border-radius: 7px;
+    }
+    &__text {
+      color: $thin-black;
+      margin-top: 5px;
+    }
+    &__send-btn {
+      height: 44px;
+      width: 372px;
+      font-size: 25px;
+      margin: 20px 0;
+      border: solid 1px $line-silver;
+      border-radius: 7px;
+      background-color: $btn-color;
+      color: $white;
+      cursor: pointer;
+    }
+  }
+}
+
+.users-wrapper__footer{
+  height: 100px;
+  background-color: $back-gray;
+}
+

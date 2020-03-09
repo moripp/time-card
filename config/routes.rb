@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-  root "emboss#index" # 打刻画面
+  root "home#index"
   resources :home, only: [:index] # ホーム画面（各ページへのリンクが存在）
   resources :emboss, only: [:index, :create] # 勤怠打刻
   resources :mytimes, only: [:index, :show] # 自分の勤怠を確認
