@@ -1,0 +1,10 @@
+.fix-mytimes-show-header
+  .title
+    %h1 Time-Card
+  .page-title
+    = page_title
+  .btn-area
+    = link_to home_index_path, class: "common-header__btn-area__btn btn-color-white" do
+      home
+    = link_to destroy_user_session_path, method: :delete, class: "common-header__btn-area__btn btn-color-blue" do
+      logout

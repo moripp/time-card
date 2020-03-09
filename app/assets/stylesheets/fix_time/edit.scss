@@ -36,6 +36,9 @@ input[type="time"]::-ms-clear {
 
 .mytimes-show-wrapper__contents__form {
   display: flex;
+  .mytimes-show-wrapper-contents-table-width {
+    width: 50px;
+  }
   .mytimes-show-wrapper__contents__send-btn {
     margin-left: 10px;
     position: relative;

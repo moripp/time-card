@@ -5,7 +5,11 @@
 
 @import "layout/common_header";
 
+@import "users/sessions_new";
+@import "users/registrations_new";
 @import "home/index";
 @import "emboss/index";
 @import "mytimes/show";
+@import "mytimes/show2";
+@import "fix_time/index";
 @import "fix_time/edit";

@@ -1,17 +1,16 @@
-.mytimes-show-wrapper
-  = render 'layouts/common_header'
+.fix-wrapper
+  .mytimes-show-wrapper
+    = render partial: 'mytimes/title_header', locals: { page_title: "勤怠確認と修正" }
 
-  .mytimes-show-wrapper__header
-    .show-margin
-    .header-title
-      勤怠編集
-    = form_with(url: edit_fix_time_path(current_user.id), method: :get, local: true, class: "date-form-area", id: "date-and-name-form-area") do |f|
-      .header-form
-        .header-form__name
-          = collection_select(:user, :name_select, User.all, :id, :name, selected: current_user.id)
-          .icon-chevron-down
-            = fa_icon("chevron-down") 
-        .header-form__date
-          = render 'mytimes/header_form_date_contents'
-          .date-send-btn
-            = f.submit "選択", class: "send-btn"
+    .mytimes-show-wrapper__header
+      = form_with(url: edit_fix_time_path(current_user.id), method: :get, local: true, class: "date-form-area", id: "date-and-name-form-area") do |f|
+        .header-form
+          .header-form__name
+            = collection_select(:user, :name_select, User.all, :id, :name, selected: current_user.id)
+            .icon-chevron-down
+              = fa_icon("chevron-down") 
+          .header-form__date
+            = render 'mytimes/header_form_date_contents'
+            .date-send-btn
+              = f.submit "選択", class: "send-btn"
+    .mytimes-show-wrapper__footer

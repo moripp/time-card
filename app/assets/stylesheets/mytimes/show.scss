@@ -1,4 +1,5 @@
 .mytimes-show-wrapper {
+  background-color: $white;
   width: 700px;
   margin: 0 auto;
   &__header {
@@ -91,7 +92,7 @@
   }
   &__contents {
     margin-top: 30px;
-    margin-bottom: 30px;
+    padding-bottom: 40px;
 
     &__table {
       width: 500px;

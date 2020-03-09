@@ -1,0 +1,39 @@
+.fix-wrapper {
+  background-color: $back-gray;
+  min-height: 100vh;
+  &__footer {
+    height: 70px;
+  }
+}
+
+.fix-mytimes-show-header {
+  height: 70px;
+  background-color: $back-gray;
+  display: flex;
+  border-bottom: solid 1px $line-silver;
+  .title {
+    width: 200px;
+    height: 100%;
+    line-height: 70px;
+    font-size: 24px;
+    color: $character-black;
+  }
+  .page-title {
+    height: 100%;
+    line-height: 70px;
+    font-size: 20px;
+    color: $thin-black;
+  }
+  .btn-area {
+    margin: 0 0 0 auto;
+    display: flex;
+    padding-top: 20px;
+    .btn-color-white {
+      background-color: $white;
+    }
+    .btn-color-blue {
+      background-color: $cornflowerblue;
+      color: $white;
+    }
+  }
+}
