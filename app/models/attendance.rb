@@ -4,11 +4,7 @@ class Attendance < ApplicationRecord
 
   # validations
   validates :going_to_work, presence: true # 出勤時間は必須
-  # validates :leave_work, attendance: true
-  validates_with AttendanceValidator
-
-
-
+  validates_with AttendanceValidator # 出勤時間 < 退勤時間の場合保存しない
 
   # メソッド
   # 勤怠情報のデータをまとめた配列を作成する（勤怠データを格納。データが無い日は休日のデータを作成し配列に格納。）
