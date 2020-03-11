@@ -2,6 +2,7 @@ class FixTimeController < ApplicationController
   # 勤怠編集に関するコントローラー
 
   before_action :move_to_Log_in
+  before_action :check_authority_Stop_other_than_admin
 
   def index
     @users = User.all
