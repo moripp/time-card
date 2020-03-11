@@ -11,5 +11,9 @@ class ApplicationController < ActionController::Base
   def move_to_Log_in
     redirect_to new_user_session_path unless user_signed_in?
   end
-  
+
+  # 権限確認
+  def check_authority_Stop_other_than_admin
+    redirect_to root_path unless current_user.position.admin?
+  end
 end

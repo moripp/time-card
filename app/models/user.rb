@@ -7,6 +7,7 @@ class User < ApplicationRecord
   # association
   has_many :attendances
   has_one :status
+  has_one :position
 
   # validations
   validates :name, presence: true
