@@ -14,6 +14,6 @@ class ApplicationController < ActionController::Base
 
   # 権限確認
   def check_authority_Stop_other_than_admin
-    redirect_to root_path unless current_user.position.admin?
+    redirect_to root_path unless current_user.authority.admin?
   end
 end

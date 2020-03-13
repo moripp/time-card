@@ -1,0 +1,15 @@
+.fix-wrapper
+  .mytimes-show-wrapper
+    = render partial: 'mytimes/title_header', locals: { page_title: "権限設定" }
+
+    = form_with(url: change_auth_path(current_user.id), method: :patch, id: "change-auth_index_form") do |f|
+      .change-auth-contents
+        .change-auth-contents__member-area
+          - @users.each do |user|
+            .change-auth-contents__member-area__name-area
+              .change-auth-contents__member-area__name-area__name
+                = user.name
+              .change-auth-contents__member-area__name-area__btn
+                = f.select :authority, Authority.auths_i18n.keys.map{|k| [Authority.auths_i18n[k], k]}, {selected: user.authority.auth}, {class: "change-auth_index_select-auth", data: {id: "#{user.id}"}}
+                .icon-chevron-down
+                  = fa_icon("chevron-down")

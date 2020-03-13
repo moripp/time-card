@@ -1,8 +1,7 @@
 class EmbossController < ApplicationController
   # 勤怠打刻に関するコントローラー
 
-  # 使用条件
-  # 無し
+  before_action :move_to_Log_in
 
   def index
     # 勤怠打刻ページでインクリメンタルサーチを実装（ユーザー検索）

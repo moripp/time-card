@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     @user = User.new(sign_up_params)
     @user.build_status
-    @user.build_position(authority: 0)
+    @user.build_authority(auth: 0)
     if @user.save
       sign_in(:user, @user)
       redirect_to root_path
