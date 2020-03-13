@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_11_062738) do
+ActiveRecord::Schema.define(version: 2020_03_13_054759) do
 
   create_table "attendances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "going_to_work"
@@ -21,12 +21,12 @@ ActiveRecord::Schema.define(version: 2020_03_11_062738) do
     t.index ["user_id"], name: "index_attendances_on_user_id"
   end
 
-  create_table "positions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "authority"
+  create_table "authorities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "auth"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_positions_on_user_id"
+    t.index ["user_id"], name: "index_authorities_on_user_id"
   end
 
   create_table "statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

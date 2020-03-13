@@ -26,5 +26,6 @@ module TimeCard
       g.test_framework false
     end
     config.time_zone = 'Tokyo' # 時間の表示を日本時間にする
+    config.i18n.default_locale = :ja
   end
 end

@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      authority:
+    attributes:
+      authority:
+        auth:
+
+  enums:
+    authority:
+      auth:
+        general: 一般
+        admin: 管理者
