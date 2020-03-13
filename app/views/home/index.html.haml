@@ -11,8 +11,8 @@
       - if current_user.authority.admin?
         = link_to fix_time_index_path, class: "home-btns-layout" do
           勤怠確認と修正
-      = link_to change_auth_index_path, class: "home-btns-layout" do
-        権限設定
+        = link_to change_auth_index_path, class: "home-btns-layout" do
+          権限設定
       = link_to emboss_index_path, class: "home-btns-layout" do
         勤怠打刻
       = link_to destroy_user_session_path, method: :delete, class: "home-btns-layout log-out-btn" do
