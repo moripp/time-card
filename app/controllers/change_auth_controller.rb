@@ -2,7 +2,7 @@ class ChangeAuthController < ApplicationController
   # 権限設定に関するコントローラー
 
   before_action :move_to_Log_in
-  # before_action :check_authority_Stop_other_than_admin
+  before_action :check_authority_Stop_other_than_admin
 
   def index
     ids = User.joins(:authority).ids
