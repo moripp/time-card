@@ -23,9 +23,9 @@ class FixTimeController < ApplicationController
     year = params.require(:year).to_i
     month = params.require(:month).to_i
     user = User.find(params.require(:user_id).to_i)
-
-    Attendance.create_new_attendances(new_Attendances_params, year, month, user) if new_Attendances_params # 勤怠レコードを新しく作る
-    Attendance.update_edit_attendances(params, year, month, user) if edit_Attendances_params # すでに存在する勤怠レコードを修正する
+    my_id = current_user.id
+    Attendance.create_new_attendances(new_Attendances_params, year, month, user, my_id) if new_Attendances_params # 勤怠レコードを新しく作る
+    Attendance.update_edit_attendances(params, year, month, user, my_id) if edit_Attendances_params # すでに存在する勤怠レコードを修正する
 
     @attendances = Attendance.get_member_attendances(year, month, user.id)
     @user = user

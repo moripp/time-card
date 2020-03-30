@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   # association
   has_many :attendances
+  has_many :correction_records
   has_one :status
   has_one :authority
 

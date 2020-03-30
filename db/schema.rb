@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_13_054759) do
+ActiveRecord::Schema.define(version: 2020_03_13_110607) do
 
   create_table "attendances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "going_to_work"
@@ -27,6 +27,20 @@ ActiveRecord::Schema.define(version: 2020_03_13_054759) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_authorities_on_user_id"
+  end
+
+  create_table "correction_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "attendance_id"
+    t.integer "type"
+    t.datetime "before_going"
+    t.datetime "before_leave"
+    t.datetime "after_going"
+    t.datetime "after_leave"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attendance_id"], name: "index_correction_records_on_attendance_id"
+    t.index ["user_id"], name: "index_correction_records_on_user_id"
   end
 
   create_table "statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
