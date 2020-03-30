@@ -1,12 +1,13 @@
 class Attendance < ApplicationRecord
   # association
   belongs_to :user
+  has_many :correction_records
 
   # validations
   validates :going_to_work, presence: true # 出勤時間は必須
   validates_with AttendanceValidator # 出勤時間 < 退勤時間の場合保存しない
 
-  # メソッド
+  # methods
   # 勤怠情報のデータをまとめた配列を作成する（勤怠データを格納。データが無い日は休日のデータを作成し配列に格納。）
   def self.get_mytimes(year, month, id)
     # 前提のデータと値を準備
@@ -82,14 +83,17 @@ class Attendance < ApplicationRecord
     return my_attendances
   end
 
-  # 勤怠レコードと一括で新しく作る
-  def self.create_new_attendances(new_array, year, month, user)
+  # 勤怠レコードを一括で新しく作る
+  def self.create_new_attendances(new_array, year, month, user, my_id)
     new_array.each do |attendance|
       if !attendance[:going_to_work].empty? && !attendance[:leave_work].empty? 
         going = "#{year}-#{month}-#{attendance[:date]} #{attendance[:going_to_work]}".in_time_zone
         leave = "#{year}-#{month}-#{attendance[:date]} #{attendance[:leave_work]}".in_time_zone
-        new_attendance = user.attendances.new(going_to_work: going ,leave_work: leave)
-        new_attendance.save
+        ActiveRecord::Base.transaction do
+          new_attendance = user.attendances.new(going_to_work: going ,leave_work: leave)
+          new_attendance.save!
+          CorrectionRecord.correction_new(going, leave, new_attendance, my_id)
+        end
       else
         # 両方空の場合は何もしない
         # どちらか片方空の可能性があるがjsで弾く（仮にjsをスルーしたらサーバーでは何もしない）
@@ -97,8 +101,8 @@ class Attendance < ApplicationRecord
     end
   end
 
-  # 勤怠レコードと一括で編集する
-  def self.update_edit_attendances(params, year, month, user)
+  # 勤怠レコードを一括で編集する
+  def self.update_edit_attendances(params, year, month, user, my_id)
     search_date = "#{year}-#{month}-1"
     edit_array = params.require(:editAttendances).keys.sort.map { |index| params.require(:editAttendances)[index] }
     raw_data = Attendance.where(user_id: user.id, going_to_work: search_date.in_time_zone.all_month)
@@ -107,21 +111,26 @@ class Attendance < ApplicationRecord
       id = attendance[:id].to_i
       datum = raw_data.find{|n| n.id == id}
       if attendance[:going_to_work].empty? && attendance[:leave_work].empty?
-        datum.destroy!
+        ActiveRecord::Base.transaction do
+          CorrectionRecord.correction_delete(datum, my_id)
+          datum.destroy!
+        end
       elsif attendance[:going_to_work].empty? || attendance[:leave_work].empty?
         # どちらか片方空の可能性があるがjsで弾く（仮にjsをスルーしたらサーバーでは何もしない）
       else
+        new_going = datum.going_to_work.strftime("%Y-%m-%d #{attendance[:going_to_work]}").in_time_zone
+        new_leave = datum.going_to_work.strftime("%Y-%m-%d #{attendance[:leave_work]}").in_time_zone
         if datum.leave_work.nil?
           datum_going = datum.going_to_work.strftime("%H:%M")
           datum_leave = ""
-          unless attendance[:going_to_work] == datum_going && attendance[:leave_work] == datum_leave
-            datum.update(going_to_work: datum.going_to_work.strftime("%Y-%m-%d #{attendance[:going_to_work]}").in_time_zone, leave_work: datum.going_to_work.strftime("%Y-%m-%d #{attendance[:leave_work]}").in_time_zone)
-          end
         else
           datum_going = datum.going_to_work.strftime("%H:%M")
           datum_leave = datum.leave_work.strftime("%H:%M")
-          unless attendance[:going_to_work] == datum_going && attendance[:leave_work] == datum_leave
-            datum.update(going_to_work: datum.going_to_work.strftime("%Y-%m-%d #{attendance[:going_to_work]}").in_time_zone, leave_work: datum.leave_work.strftime("%Y-%m-%d #{attendance[:leave_work]}").in_time_zone)
+        end
+        unless attendance[:going_to_work] == datum_going && attendance[:leave_work] == datum_leave
+          ActiveRecord::Base.transaction do
+            CorrectionRecord.correction_edit(datum, new_going, new_leave, my_id)
+            datum.update(going_to_work: new_going, leave_work: new_leave)
           end
         end
       end

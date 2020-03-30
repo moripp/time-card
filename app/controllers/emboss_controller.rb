@@ -30,7 +30,7 @@ class EmbossController < ApplicationController
       end
     else # 退勤中の場合(stateが無い場合も含む)
       @attendance = @user.attendances.new(going_to_work: time)
-      @value =ActiveRecord::Base.transaction do
+      @value = ActiveRecord::Base.transaction do
         @attendance.save!
         @status.update!(state: "going_to_work")
       end
