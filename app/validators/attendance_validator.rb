@@ -4,9 +4,10 @@ class AttendanceValidator < ActiveModel::Validator
   def validate(record)
     going_to_work = record[:going_to_work]
     leave_work = record[:leave_work]
-
-    if going_to_work >= leave_work
-      record.errors[:leave_work] << (options[:message] || '無効な値です')
+    unless leave_work.nil?
+      if going_to_work >= leave_work
+        record.errors[:leave_work] << (options[:message] || '無効な値です')
+      end
     end
   end
 end
