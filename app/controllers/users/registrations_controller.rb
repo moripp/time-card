@@ -18,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       sign_in(:user, @user)
       redirect_to root_path
     else
-      redirect_to new_user_registration_path
+      render :new
     end
   end
 

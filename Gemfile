@@ -67,6 +67,7 @@ gem 'haml-rails'
 gem 'erb2haml' # hamlに変換する
 gem 'jquery-rails'
 gem 'pry-rails'
+gem 'rails-i18n'
 
 # 装飾
 gem 'font-awesome-rails'

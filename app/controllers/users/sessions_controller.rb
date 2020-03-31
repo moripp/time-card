@@ -9,18 +9,9 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  def create
-    user = current_user
-    unless user.authority.present?
-      auth = user.build_authority(auth: 0)
-      if auth.save
-        super
-      else
-        redirect_to root_path
-      end
-    end
-    super
-  end
+  # def create
+  #   super
+  # end
 
   # DELETE /resource/sign_out
   # def destroy
