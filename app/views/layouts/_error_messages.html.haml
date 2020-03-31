@@ -1,0 +1,8 @@
+-if model.errors.any?
+  .error-messages-area
+    .error-messages-area__title
+      エラーが発生しました
+
+    .error-messages-area__error-list
+      -model.errors.full_messages.each do |message| 
+        %li= message
